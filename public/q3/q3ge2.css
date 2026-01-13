@@ -21,3 +21,7 @@ nav {
     padding: 14px 16px;
     text-decoration: none;
   }
+
+  input:focus{
+    color:rgb(247, 234, 219);
+  }
