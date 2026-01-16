@@ -23,24 +23,24 @@
         <fieldset>
           <legend>Your Credentials</legend><br/>
           <label> StudentID: 
-            <input type="number" name="studentID" id="studentID" required />
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="number" name="studentID" id="studentID" required />
           </label><br/><br/>
           <label> Full Name:
-            <input type="text" name="studentName" id="studentName" required />
+            <input onfocus="changeColor(this)" onblur="resetColor(this)"  type="text" name="studentName" id="studentName" required />
           </label><br/><br/>
           <label>Birthday:
-            <input type="date" name="dob" id="dob" required />
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="date" name="dob" id="dob" required />
           </label><br/><br/>
           <label>Email:
-            <input type="email" name="email" id="email" required />
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="email" name="email" id="email" required />
           </label>
         </fieldset>
         <fieldset>
         <label>Mobile Phone:
-            <input type="text" name="phoneNo" id="phoneNo" required />
+            <input onfocus="changeColor(this)" onblur="resetColor(this)"  type="text" name="phoneNo" id="phoneNo" required />
         </label><br/><br/>
         <label>Grade Level:
-            <select name="cluborg" id="cluborg" required>
+            <select name="cluborg" id="cluborg" required >
                 <option value="" disabled selected> Choose your grade level</option>
                 <option value="g7">Grade 7</option>
                 <option value="g8">Grade 8</option>
@@ -76,11 +76,7 @@
             <input type="reset" value=" Clear ">
   
           </fieldset> 
-          <script>
-            const form = document.getElementById("dForm");
-
-
-          </script>
+          <script src="q3ge2scr.js"></script>
         </form>
     </section>
 </body>
