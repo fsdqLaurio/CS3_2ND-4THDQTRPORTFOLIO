@@ -1,44 +1,54 @@
-let acctString = localStorage.getItem("accounts")
-if (!acctString) { accountList = {} } // initialize the variable to contain the list of accounts object
-else accountList = JSON.parse(acctString) // converts string into the correct data type in this case object
+function readLocalStorage(){
+  let acctString = localStorage.getItem("accounts");
+  if (!acctString) { 
+    accountList = {};
+   }
 
-const form = document.getElementById("dForm"); // get the HTML form from q3ge2Mendoza.html
+  else {
+    accountList = JSON.parse(acctString);
+  }
 
-// event handler on the submit button instead of onsubmit on the button itself
-form.addEventListener("submit", function(e) { // assign an event handler of submit to the form
-    e.preventDefault(); // prevent page reload because forms gets submitted
+    return accountList; 
+}
 
-    if (confirm("Sure You Want To Save Your Work?")) {   
-        // use a predefined class to create an object of data
-        const data = new FormData(form);
+function writeLocalStorage(form){ 
 
-        // Convert to object
-        const obj = Object.fromEntries(data.entries()); // get all the data from the form
-        // place the object inside the accountList
-        // accountList is an object containing other objects with username as the key
-        accountList[obj.uname] = {};
-        for (let key in obj) { // go through the properties of the object and create another account
-            if (key != "uname") { 
-                accountList[obj.uname][key] = obj[key];
-            }
-        }
-        
-        console.log(accountList) // to check all the account information if it will be saved correctly
-        acctString = JSON.stringify(accountList) // convert object into string, as a requirement of localStorage
-        localStorage.setItem("accounts", acctString) // save on the user's computer
-        form.submit();
-    }
-  });
+  const data = new FormData(form); 
+
+  const obj = Object.fromEntries(data.entries()); // get all the data from the form; converts to object data structure
+  
+  accountList[obj.uname] = {}; // initialize new entry for account; key is username
+  for (let key in obj) { 
+      if (key != "uname") { 
+          accountList[obj.uname][key] = obj[key];
+      }
+  }
+  
+  console.log(accountList); 
+  acctString = JSON.stringify(accountList);
+  localStorage.setItem("accounts", acctString);
+
+}
+
+const form = document.getElementById("dForm");
+form.addEventListener("submit", function(e) { 
+
+  if (confirm("Are you sure with your submission")) {   
+    writeLocalStorage(form);
+  }
+
+  // form.submit();
+    
+});
 
 // event handler for the reset button instead of onreset on the button itself
-form.addEventListener("reset", function(e) { // 
-  // Ask for confirmation before clearing
+form.addEventListener("reset", function(e) { 
   if (!confirm("Sure you want to clear your data?")) {
-    e.preventDefault(); // cancel the reset if user clicks "Cancel"
+    e.preventDefault(); 
   }
 });
 
-// called when user is on the input field
+
 function changeColor(ele) {
   console.log(ele);
   ele.style.backgroundColor = "#FFFCCC";
@@ -47,3 +57,5 @@ function resetColor(ele) {
   console.log(ele);
   ele.style.backgroundColor = "#CCF8FF";
 } 
+
+

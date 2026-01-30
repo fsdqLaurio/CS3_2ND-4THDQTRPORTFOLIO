@@ -1,0 +1,65 @@
+<DOCTYPE html>
+    <head>
+
+    </head>
+
+    <body>
+        <table>
+            <th></th>
+            <td></td>
+        </table>
+    </body>
+
+    <script>
+    
+    function readLocalStorage(){
+        let acctString = localStorage.getItem("accounts");
+        if (!acctString) { 
+            accountList = {};
+        }
+
+        else {
+            accountList = JSON.parse(acctString);
+        }
+
+        return accountList; 
+    }
+
+        const table = document.querySelector('table');
+
+        function resetTable(table){
+            table.innerHTML = '';
+        }
+
+        function populateTable(){ 
+            resetTable(table);
+
+            const headerRow = document.createElement('tr');
+            const headers = ['Student ID', 'Full Name', 'Birthday', 'Email', 'Mobile Phone', 'Grade Level', 'Residence Type', 'Organization', 'Why Join'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+
+            table.appendChild(headerRow);
+
+            // populated table w data
+            let accountList = readLocalStorage();
+            for(let account in accountList){ // executes each entry (account) in accountList
+                const row = document.createElement('tr'); // for each account; 
+                for(let entry in accountList[account]){ // for each entry in account
+                    const td = document.createElement('td'); 
+                    td.textContent = accountList[account][entry]; 
+                    row.appendChild(td);
+                }
+                table.appendChild(row); // appends each account
+            }
+        
+        } 
+
+
+        populateTable();
+
+    </script>
+</DOCTYPE>
