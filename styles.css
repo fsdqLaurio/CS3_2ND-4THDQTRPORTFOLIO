@@ -112,9 +112,22 @@ body{
     box-shadow: 5px 5px 5px black
   }
  
+  .box {
+    border-radius: 15px;
+    box-sizing: 40vw 40vw 40vw 40vw;
+    width: 50vw;
+    padding: 50px;
+    display: flex;
+    height: 20vw;
+    margin-left: 20%;
+    background-color: white;
+    animation: fadeInUp 2s;
+    transform: translateY(20%);
+  }
+
 @keyframes fadeInUp {
   0% {
-    transform: translateY(100%);
+    transform: translateY(15%);
     opacity: 0;
   }
   100% {
@@ -122,7 +135,7 @@ body{
     opacity: 1;
   }
 }
-
-.fadeInUp-animation {
-  animation: 1.5s fadeInUp;
+.info{
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: right;
 }
