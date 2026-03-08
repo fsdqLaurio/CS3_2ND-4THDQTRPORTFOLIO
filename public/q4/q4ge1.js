@@ -32,10 +32,10 @@ readLocalStorage();
 // star
   let selectedRating = 0;
 
-    document.querySelectorAll(".star").forEach(star => {
+    document.querySelectorAll(".star").forEach(star => { 
       star.addEventListener("click", function() {
-        selectedRating = this.getAttribute("value");
-        updateStars(selectedRating);
+        selectedRating = this.getAttribute("value"); // gets the value of the chosen star
+        updateStars(selectedRating); 
       });
     });
 
@@ -49,21 +49,15 @@ readLocalStorage();
     }
 
 function writeLocalStorage(movieForm){
-  let movieData = new FormData(movieForm);
+  let movieData = new FormData(movieForm); // gets form data
   let title = movieData.get("movieTitle");
-  let year = movieData.get("year");
-  let genre = movieData.get("genre");
-  let rating = movieData.get("rating");
+  let year = movieData.get("year"); // gets year
+  let genre = movieData.get("genre"); // gets genre
+  let rating = movieData.get("rating"); // gets rating
   let starRating = selectedRating; // get the selected star rating
 
-  // rating into stars
-  
-    for (let i = 0; i < Number(rating); i++) {
-      starRating += '★';
-    }
 
-
-  // index as key
+  // sets index/numeric values as key
   let moviesArr = Object.values(movieList);
   let newMovie = {
     title: title,
@@ -84,15 +78,21 @@ function writeLocalStorage(movieForm){
 }
 
 function showMovieList() {
-  let container = document.getElementById("movieListContainer");
-  if (!container) return;
-  let movies = Object.values(movieList);
+  let container = document.getElementById("movieListContainer"); // 
+  let movies = Object.values(movieList); // setting movies to the array of values 
   
-  let html = '<ul>';
-  movies.forEach((movie, idx) => {
-    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: ${movie.rating}</li>`;
+  let html = '<ul>'; // starts list
+  // createst list items for the elements in the array
+  movies.forEach((movie, idx) => { 
+    
+    let ratingDisplay = movie.rating;
+    ratingDisplay = '★'.repeat(Number(ratingDisplay)); // repeats stars corresponding to rating value
+    
+    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span></li>`;
   });
+ 
   html += '</ul>';
   container.innerHTML = html;
-}
+  
+  }
 showMovieList();

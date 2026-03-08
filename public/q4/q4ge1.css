@@ -101,6 +101,11 @@ h2 {
 	cursor: pointer;
 	
 }
+.movieForm button:hover {
+    background: #A0C96B;
+    scale: 1.05;
+    transition: all 0.3s ease;
+}
 
 ul {
     list-style-type: none;
