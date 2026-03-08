@@ -12,51 +12,45 @@
 </head>
 
 <body>
-    <nav class ="navbar">
-        <a href="../../index.html">Home</a>
-        <a href="">Show Saved Accounts</a>
-    </nav>
+   <section>
 
-    <section>
-    <h1 class="title">Sign-up Page</h1>
-
-      <form id="dForm" method="get">
+      <form id="movieForm" method="get" class="movieForm">
+        <legend><h1>Add a Movie</h1></legend>
         <fieldset>
-            <legend>Add a Movie</legend>
-            <label> Movie Title: 
-                <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="movieTitle" id="movieTitle" required />
-            </label><br/><br/>
-            <label> Year:
-                <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="year" id="year" required />
-            </label>
+            <label> Movie Title: </label>
+                <input type="text" name="movieTitle" id="movieTitle" required /><br/><br/>
+            <label> Year: </label>
+                <input type="text" name="year" id="year" required /><br/><br/>
 
-            <label> Genre:
+            <label> Genre: </label>
                 <select name="genre" id="genre" required >
                     <option value="" disabled selected> Choose a genre</option>
-                    <option value="action">Action</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="drama">Drama</option>
-                    <option value="horror">Horror</option>
-                    <option value="sci-fi">Sci-fi</option>
-                    <option value="romance">Romance</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Sci-fi">Sci-fi</option>
+                    <option value="Romance">Romance</option>
                     <option value="historical">Historical</option>
-                </select>
-            </label><br/><br/>
-
-            <div id="rating">
-                <label> Rating:
-                    <input type="radio" name="rating" id="rat5" value="5" required/>
-                    <input type="radio" name="rating" id="rat4" value="4" required/>
-                    <input type="radio" name="rating" id="rat3" value="3" required/>
-                    <input type="radio" name="rating" id="rat2" value="2" required/>
-                    <input type="radio" name="rating" id="rat1" value="1" required/>
-                </label>
+                </select><br/><br/>
+   
+            <label> Rating:  </label>
+            <div class="stars" id="rating">
+                <span class="star" value="1">&#9733;</span>
+                <span class="star" value="2">&#9733;</span>
+                <span class="star" value="3">&#9733;</span>
+                <span class="star" value="4">&#9733;</span>
+                <span class="star" value="5">&#9733;</span>
             </div>
-            </label>
         </fieldset>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Add movie</button>
         </form>
+    </section>
+
+    <section>
+        <h2>Movie List</h2>
+        <div id="movieListContainer"></div>
     </section>
 </body>
 </html>
