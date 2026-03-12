@@ -88,6 +88,9 @@ function deleteMovie(idx) {
 function showMovieList() {
   let container = document.getElementById("movieListContainer"); // 
   let movies = Object.values(movieList); // setting movies to the array of values 
+
+  // let sum = movie.ratings.reduce((a,b)=>a+b,0);
+  // let avg = Math.round(sum / movie.ratings.length);
   
   let html = '<ul>'; // starts list
   // createst list items for the elements in the array
@@ -96,7 +99,8 @@ function showMovieList() {
     let ratingDisplay = movie.rating;
     ratingDisplay = '★'.repeat(Number(ratingDisplay)); // repeats stars corresponding to rating value
     
-    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span></li>`;
+    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span>
+    <button onclick="deleteMovie(${idx})">Delete</button></li>`;
   });
 
   html += '</ul>';
