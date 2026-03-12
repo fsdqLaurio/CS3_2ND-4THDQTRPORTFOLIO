@@ -77,6 +77,21 @@ function writeLocalStorage(movieForm){
   console.log(movieList);
 }
 
+function deleteMovie(idx) {
+  if (confirm("Are you sure you want to delete this movie?")) {
+    delete movieList[idx]; //deletes movie 
+
+    // reindex the remaining movies
+    let moviesArr = Object.values(movieList);
+    movieList = {};
+    moviesArr.forEach((movie, newIdx) => {
+      movieList[newIdx] = movie;
+    });
+    localStorage.setItem("movieTitles", JSON.stringify(movieList));
+    showMovieList();
+  }
+}
+
 function showMovieList() {
   let container = document.getElementById("movieListContainer"); // 
   let movies = Object.values(movieList); // setting movies to the array of values 
@@ -88,11 +103,12 @@ function showMovieList() {
     let ratingDisplay = movie.rating;
     ratingDisplay = '★'.repeat(Number(ratingDisplay)); // repeats stars corresponding to rating value
     
-    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span></li>`;
+    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span> <button onclick="deleteMovie(${idx})">Delete</button></li>`;
   });
 
  
   html += '</ul>';
+  
   container.innerHTML = html;
   
   }
