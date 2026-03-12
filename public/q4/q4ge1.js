@@ -9,13 +9,6 @@ form.addEventListener("submit", function(e) {
   }
 });
 
-// event handler for the clear button 
-form.addEventListener("reset", function(e) { 
-  if (!confirm("Are you sure you want to delete?")) {
-    e.preventDefault(); 
-  }
-});
-
 function readLocalStorage(){
   let moviesString = localStorage.getItem("movieTitles");
   if (!moviesString) {
@@ -103,12 +96,10 @@ function showMovieList() {
     let ratingDisplay = movie.rating;
     ratingDisplay = '★'.repeat(Number(ratingDisplay)); // repeats stars corresponding to rating value
     
-    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span> <button onclick="deleteMovie(${idx})">Delete</button></li>`;
+    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span></li>`;
   });
 
- 
   html += '</ul>';
-  
   container.innerHTML = html;
   
   }
