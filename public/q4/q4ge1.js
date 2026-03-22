@@ -1,4 +1,4 @@
-let movieList = {};
+
 const form = document.getElementById("movieForm"); // form submit 
 form.addEventListener("submit", function(e) { 
   if (confirm("Are you sure with your submission")) {   
@@ -6,13 +6,6 @@ form.addEventListener("submit", function(e) {
     showMovieList();
   } else {
     e.preventDefault();
-  }
-});
-
-// event handler for the reset button 
-form.addEventListener("reset", function(e) { 
-  if (!confirm("Sure you want to clear your data?")) {
-    e.preventDefault(); 
   }
 });
 
