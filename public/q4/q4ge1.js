@@ -48,51 +48,58 @@ readLocalStorage();
       });
     }
 
-function writeLocalStorage(movieForm){
-  let movieData = new FormData(movieForm); // gets form data
+function writeLocalStorage(movieForm) { // gets the data from the user input 
+  let movieData = new FormData(movieForm);
   let title = movieData.get("movieTitle");
-  let year = movieData.get("year"); // gets year
-  let genre = movieData.get("genre"); // gets genre
-  let rating = movieData.get("rating"); // gets rating
-  let starRating = selectedRating; // get the selected star rating
+  let year = movieData.get("year");
+  let genre = movieData.get("genre");
+  let newRating = Number(selectedRating);
 
+  let movies = JSON.parse(localStorage.getItem("movieTitles") || "[]"); // gets existing movies OR makes an empty array if none
+  let existing = movies.find(m => m.title.toLowerCase() === title.toLowerCase()); // gets movies that have the same titles
 
-  // sets index/numeric values as key
-  let moviesArr = Object.values(movieList);
-  let newMovie = {
-    title: title,
-    year: year,
-    genre: genre,
-    rating: starRating
-  };
-  moviesArr.push(newMovie);
+    if (existing) { // if there is an existing movie,
+      let count = existing.ratingCount + 1;
+      existing.rating = Math.round(((existing.rating * existing.ratingCount) + newRating) / count * 10) / 10; // average rating + add a decimal place
+      existing.ratingCount = count; // updates rating
 
-  // movieList as object with keys
-  movieList = {};
-  moviesArr.forEach((movie, idx) => {
-    movieList[idx] = movie;
-  });
+  } 
+  
+  else { // if no existing, make a new movie
+      movies.push({ 
+        title, 
+        year, genre, 
+        rating: newRating, 
+        ratingCount: 1 });
+  }
 
-  localStorage.setItem("movieTitles", JSON.stringify(movieList));
-  console.log(movieList);
+  localStorage.setItem("movieTitles", JSON.stringify(movies)); 
+}
+
+function getStars(rating) {
+  return "★".repeat(Math.floor(rating)) 
+       + (rating % 1 >= 0.5 ? "½" : "") 
+       + "☆".repeat(5 - Math.ceil(rating));
+}
+
+function deleteMovie(title) {
+  if (!confirm(`Delete movie "${title}"?`)) return;
+  let movies = JSON.parse(localStorage.getItem("movieTitles") || "[]");
+  movies = movies.filter(m => m.title !== title);
+  localStorage.setItem("movieTitles", JSON.stringify(movies));
+  
+  showMovieList();
 }
 
 function showMovieList() {
-  let container = document.getElementById("movieListContainer"); // 
-  let movies = Object.values(movieList); // setting movies to the array of values 
+
+  let movies = JSON.parse(localStorage.getItem("movieTitles") || "[]");
+  document.getElementById("movieListContainer").innerHTML = 
+    `<ul>${movies.map(m => {
+      let stars = getStars(m.rating);
   
-  let html = '<ul>'; // starts list
-  // createst list items for the elements in the array
-  movies.forEach((movie, idx) => { 
-    
-    let ratingDisplay = movie.rating;
-    ratingDisplay = '★'.repeat(Number(ratingDisplay)); // repeats stars corresponding to rating value
-    
-    html += `<li><strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color:#FFD700;">${ratingDisplay}</span></li>`;
-  });
- 
-  html += '</ul>';
-  container.innerHTML = html;
-  
-  }
+      return `<li><strong>${m.title}</strong> (${m.year}) - ${m.genre}, Rating: <span style="color:#FFD700;">${stars}</span> ${m.rating}★</li>`;
+    }).join("")}</ul>`;
+}
+
 showMovieList();
