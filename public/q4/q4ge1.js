@@ -91,7 +91,7 @@ function showMovieList() {
     `<ul>${movies.map(m => {
       let stars = getStars(m.rating);
   
-      return `<li><strong>${m.title}</strong> (${m.year}) - ${m.genre}, Rating: <span style="color:#FFD700;">${stars}</span> ${m.rating}★</li>`;
+      return `<li><strong>${m.title}</strong> (${m.year}) - ${m.genre}, Rating: <span style="color:#FFD700;">${stars}</span></li>`;
     }).join("")}</ul>`;
 }
 
